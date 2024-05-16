@@ -1,0 +1,54 @@
+﻿﻿@model MyPassionProject.Models.ViewModels.UpdateEvent
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Event</h2>
+
+<div class="card-body">
+    <form method="POST" action="@Url.Action("Update", "Event", new { id = Model.SelectedEvent.EventId })" enctype="multipart/form-data">
+        <input type="text" style="display:none;" name="EventId" value="@Model.SelectedEvent.EventId" />
+        <div class="form-group">
+            <label>Event Name:</label> <input type="text" class="form-control" name="Title" value="@Model.SelectedEvent.Title" />
+        </div>
+        <div class="form-group">
+            <label>Event Location:</label> <input type="text" class="form-control" name="Location" value="@Model.SelectedEvent.Location" />
+        </div>
+        <div class="form-group">
+            <label>Event Date & Time:</label> <input type="text" class="form-control" name="EventDateTime" value="@Model.SelectedEvent.EventDateTime" />
+        </div>
+        <div class="form-group">
+            <label>Event Capacity:</label> <input type="text" class="form-control" name="Capacity" value="@Model.SelectedEvent.Capacity" />
+        </div>
+        <div class="form-group">
+            <label>Event Details:</label> <input type="text" class="form-control" name="Details" value="@Model.SelectedEvent.Details" />
+        </div>
+        <div>
+            <label>Category Id:</label>
+            <select name="CategoryId">
+                @foreach (var Category in Model.CategoryOptions)
+                {
+                    string selected = "";
+                    if (Category.CategoryId == Model.SelectedEvent.CategoryId)
+                    {
+                        selected = "selected";
+                    }
+                    <option value="@Category.CategoryId" @selected>@Category.CategoryName</option>
+
+                }
+            </select>
+        </div>
+        <div>
+            <label>Event Image:</label>
+            <input type="file" name="EventImage" accept="image/*" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Update" />
+            <a href="@Url.Action("Find", "Event", new { id = Model.SelectedEvent.EventId })" class="btn btn-secondary">Cancel</a>
+        </div>
+        
+
+    </form>
+</div>

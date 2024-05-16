@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MyPassionProject.Models.CategoryDto>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>List</h2>
+
+@foreach (MyPassionProject.Models.CategoryDto Category in Model)
+{
+    <div>
+        <a href="/Category/Find/@Category.CategoryId"> @Category.CategoryName</a>
+    </div>
+
+}
+
+<div>
+    <a href="/Category/New" class="btn btn-primary">Add New Category</a>
+</div>
+

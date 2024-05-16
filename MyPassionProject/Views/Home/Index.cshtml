@@ -1,0 +1,134 @@
+﻿@model MyPassionProject.Models.ViewModels.EventsForCategory
+@{
+    ViewBag.Title = "Index";
+
+    @*<a href="~/Content/bootstrap-utilities.min.css.map">~/Content/bootstrap-utilities.min.css.map</a>*@
+    <link href="~/CSS/index.css" rel="stylesheet" />
+}
+
+<nav class="mainnav">
+    <a href="#Fun">Fun</a>
+    <a href="#Fare">Fare</a>
+    <div class="animation"></div>
+</nav>
+
+<div class="main">
+    <div class="card-container" name="Fun">
+        @foreach (var Event in Model.FunEvents)
+        {
+            <div class="eachone">
+                <div class="event">
+                    <div class="card" style="background-image: url('@Event.ImagePath');">
+                        <div class="content">
+                            <h2 id="eventTitle">@Event.Title</h2>
+                            <h3> Location : </h3>
+                            <p id="eventLocation">@Event.Location</p>
+                            <h3>Date: </h3>
+                            <p id="eventDate">@Event.EventDateTime</p>
+                            <h3> Capacity:</h3>
+                            <p id="eventCapacity">@Event.Capacity</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p class="threeD">Details:</p>
+                        <p class="breakdown threeD">
+                            @Event.Details
+                            <a href="/Event/Find/@Event.EventId">See More</a>
+                        </p>
+                    </div><!--end of details-->
+                </div><!--end of event-->
+            </div><!--end of eachone-->
+        }
+    </div>
+
+    <div name="Fare" style="display:none">
+        @foreach (var Event in Model.FareEvents)
+        {
+            <div class="eachone">
+                <div class="event">
+                    <div class="card" style="background-image: url('@Event.ImagePath');">
+                        <div class="content">
+                            <h2 id="eventTitle">@Event.Title</h2>
+                            <h3> Location : </h3>
+                            <p id="eventLocation">@Event.Location</p>
+                            <h3>Date: </h3>
+                            <p id="eventDate">@Event.EventDateTime</p>
+                            <h3> Capacity:</h3>
+                            <p id="eventCapacity">@Event.Capacity</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p class="threeD">Details:</p>
+                        <p class="breakdown threeD">
+                            @Event.Details
+                            <a href="/Event/Find/@Event.EventId">See More</a>
+                        </p>  
+                    </div><!--end of details-->
+                   
+                </div><!--end of event-->
+            </div><!--end of eachone-->
+        }
+    </div>
+    @*<div class="list">
+            <h2>List</h2>
+            <p id="listInput"></p>
+            <div class="register">
+                <form name="myForm" id="myForm">
+                    <p>Reserve your spot here:</p>
+                    <label for="regisName">Name : </label>
+                    <input type="text" id="regisName" name="regisName" placeholder="i.e.: James Lee">
+                    <button type="submit" id="button">Add</button>
+                </form>
+            </div>
+        </div><!--end of list-->*@
+
+
+</div>
+@section scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const funLink = document.querySelector('a[href="#Fun"]');
+            const fareLink = document.querySelector('a[href="#Fare"]');
+            const funSection = document.querySelector('div[name="Fun"]');
+            const fareSection = document.querySelector('div[name="Fare"]');
+            const links = document.querySelectorAll('.mainnav a');
+            const animation = document.querySelector('.animation');
+
+            //funSection.style.display = "block"
+            //fareSection.style.display = "none";
+
+            links.forEach(function (link, index) {
+                link.addEventListener("click", function () {
+                    // Calculate the left position based on the index of the clicked link
+                    const leftPosition = index * 50 + '%';
+                    animation.style.left = leftPosition;
+                });
+            });
+            
+
+            fareLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                funSection.classList.remove("card-container");
+                funSection.style.display = "none";  
+                fareSection.classList.add("card-container");
+                fareSection.style.display = "block";
+                
+               
+               
+            });
+            funLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                fareSection.style.display = "none";
+                fareSection.classList.remove("card-container");
+              
+                funSection.style.display = "block"; 
+                fareSection.classList.add("card-container");
+               
+                
+               
+            });
+
+
+        });
+    </script>
+}

@@ -1,0 +1,109 @@
+﻿@model MyPassionProject.Models.ViewModels.FindEvent
+
+@{
+    ViewBag.Title = "Find";
+
+}
+
+<a href="/Home/Index" class="btn btn-primary">Go back to Home</a>
+<h2>@Model.SelectedEvent.Title</h2>
+<h4>Location: @Model.SelectedEvent.Location</h4>
+<h4>Event Time: @Model.SelectedEvent.EventDateTime</h4>
+<h4>Capacity: @Model.SelectedEvent.Capacity</h4>
+<h4>Details: @Model.SelectedEvent.Details</h4>
+<h4>Category:@Model.SelectedEvent.CategoryName</h4>
+
+
+
+
+@*
+
+    <div>
+
+
+
+            <h2>Paticipant in this @Model.SelectedEvent.Title:</h2>
+                @foreach (var AppUser in Model.ParticipatingUsers)
+                {
+                    <a href="/AppUser/Find/@AppUser.UserId">@AppUser.UserName</a>
+                    <a href="/Event/UnAssociate/@Model.SelectedEvent.EventId?UserId=@AppUser.UserId">[x]</a><br />
+                }
+            </div>
+
+            <div>
+                <h4>Add new paticipant to this Event: @Model.SelectedEvent.Title</h4>
+                <form method="POST" action="/Event/Associate">
+                    <input type="hidden" name="EventId" value="@Model.SelectedEvent.EventId">
+                    <label for="UserId">Select User:</label>
+                    <select name="UserId" id="UserId">
+                        @foreach (var AppUser in Model.NotPaticipatingUsers)
+                        {
+                            <option value="@AppUser.UserId">@AppUser.UserName</option>
+                        }
+                    </select>
+                    <input type="submit" value="Associate AppUser" />
+                </form>
+    </div>
+*@
+<div class="d-grid gap-2 d-md-block">
+    <form method="POST" action="/Event/Associate">
+        <input type="hidden" name="EventId" value="@Model.SelectedEvent.EventId">
+        <input type="hidden" name="CurrentUserId" value="@Model.CurrentUserId">
+        <button type="submit" class="btn btn-success" onclick="return confirmAssociate()">Join</button>
+    </form>
+    <form method="GET" action="/Event/UnAssociate">
+        <input type="hidden" name="EventId" value="@Model.SelectedEvent.EventId">
+        <input type="hidden" name="CurrentUserId" value="@Model.CurrentUserId">
+        <button type="submit" class="btn btn-danger" onclick="return confirmUnAssociate()">Cancel</button>
+    </form>
+</div>
+
+<br />
+<hr />
+
+
+<div name="modify" style="display:none">
+
+    <div>
+        <a href="/Event/Edit/@Model.SelectedEvent.EventId" class="btn btn-primary">Update This  Event</a>
+    </div>
+    @*
+            @Html.Partial("~/Views/Shared/_EventPartial.cshtml", Model)
+            @Html.ActionLink("Delete This Event", "DeleteConfirm", "Event", new { id = Model.SelectedEvent.EventId }, new { @class = "btn btn-danger" })
+
+        @Html.ActionLink("Delete This Event", "DeleteConfirm", "Event", new { id = Model.SelectedEvent.EventId }, new { @class = "btn btn-danger" })
+    *@
+    <div>
+        @Html.ActionLink("Delete This Event", "DeleteConfirm", "Event", new { id = Model.SelectedEvent.EventId }, new { @class = "btn btn-danger" })
+
+    </div>
+</div>
+@section scripts {
+    <script>
+    function confirmAssociate() {
+        var isAdmin = @User.IsInRole("Admin").ToString().ToLower();
+        if (!isAdmin) {
+            return true; // Proceed with form submission without confirmation
+        }
+
+        var confirmed = confirm("Congratulations! You're in! Can't wait to see you there!");
+        return confirmed;
+    }
+
+    function confirmUnAssociate() {
+        var isAdmin = @User.IsInRole("Admin").ToString().ToLower();
+        if (!isAdmin) {
+            return true; // Proceed with form submission without confirmation
+        }
+
+        var confirmed = confirm("What a pity! Hope to see you in another event!");
+        return confirmed;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const modify = document.querySelector('[name="modify"]');
+            modify.style.display = "block";
+        });
+    </script>
+
+}
+

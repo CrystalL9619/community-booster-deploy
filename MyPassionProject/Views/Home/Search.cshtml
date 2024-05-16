@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MyPassionProject.Models.EventDto>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Your Search Result:</h2>
+
+<div class="card-container">
+
+    @foreach (var Event in Model)
+    {
+        <div class="eachone">
+            <div class="event">
+                <div class="card" style="background-image: url('@Event.ImagePath');">
+                    <div class="content">
+                        <h2 id="eventTitle">
+                            @Event.Title
+                        </h2>
+                        <h3> Location : </h3>
+                        <p id="eventLocation">@Event.Location</p>
+                        <h3>Date: </h3>
+                        <p id="eventDate">@Event.EventDateTime</p>
+                        <p id="eventCapacity">@Event.Capacity</p>
+                    </div>
+                </div>
+                <div class="details">
+                    <p class="threeD">Details:</p>
+                    <p class="breakdown threeD">
+                        <a href="/Event/Find/@Event.EventId">See More:</a> @Event.Details
+                    </p>
+                </div><!--end of details-->
+            </div><!--end of event-->
+        </div><!--end of eachone-->
+    }
+
+</div><!--end of card-container-->

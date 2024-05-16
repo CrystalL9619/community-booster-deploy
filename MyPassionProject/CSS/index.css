@@ -1,0 +1,375 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    margin: 1.5em 2em 0 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+h1 {
+    font-family: "Marcellus", serif;
+    margin: 0;
+    padding: 0;
+}
+
+#headernav {
+    margin-top: 2em;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: center;
+    gap: 1em;
+}
+
+.searchBar {
+    margin: 0;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    left: 40%;
+}
+
+#searchInput {
+    width: 100%;
+    height: 40px;
+    border-radius: 15px;
+}
+
+.mainnav {
+    margin: 30px auto;
+    position: relative;
+    width: calc(100%-5px);
+    height: 50px;
+    background-color: #34495e;
+    border-radius: 10px;
+    font-size: 0;
+    box-shadow: 2px 2px 2px #000;
+}
+
+    .mainnav a {
+        width: 50%;
+        height: 100%;
+        line-height: 50px;
+        font-size: 15px;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+    }
+
+.animation {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: all 1s ease 0s;
+    border-radius: 10px;
+    width: 50%;
+    background-color: #1abc9c;
+}
+
+/*a:nth-child(1):hover ~ .animation {
+    left: 0;
+    background-color: #1abc9c;
+}
+
+a:nth-child(2):hover ~ .animation {
+    left: 50%;
+    background-color: #1abc9c;
+}
+*/
+
+.main {
+    margin: 5% 5% 50px 50px;
+    padding:0;
+    gap: 0px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.eachone {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    margin:0 0 20px 0;
+    padding: 0;
+}
+
+.event {
+    width: 300px;
+    height: 400px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#eventTitle {
+    margin-top: 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+.list {
+    position: relative;
+    top: 0;
+    left: 50px;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: bold;
+    background-color: #1abc9c;
+    border-radius: 15px;
+}
+
+    .list h2 {
+        margin-top: 5%;
+        color: #34495e;
+    }
+
+.register {
+    position: relative;
+    top: 120px;
+    width: 100%;
+    font-size: x-large;
+}
+
+.newEvent {
+    padding-right: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 300px;
+    line-height: 30px;
+    font-size: x-large;
+}
+
+#eventForm input {
+    width: auto;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.event .card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #34495e;
+    background-image: url(./kelsey-chance-tAH2cA_BL5g-unsplash.jpg);
+    background-size: cover;
+    border-radius: 15px;
+}
+
+    .event .card::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 75%;
+        top: 50%;
+        left: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        transform: translate(-50%, -50%);
+    }
+
+.content {
+    position: absolute;
+    width: 200px;
+    max-height:250px;
+    top: 48%;
+    left: 55%;
+    transform: translateX(-50%) translateY(-50%) translateZ(60px);
+}
+
+.event .details {
+    width: 300px;
+    height: 400px;
+    color: #fff;
+    background: #34495e;
+    border-radius: 15px;
+    transform: rotateY(180deg);
+}
+
+    .event .details p {
+        width: 90%;
+        margin: 20px 10px;
+        padding: 15px 15px;
+        border-radius: 15px;
+        line-height: 20px;
+        letter-spacing: 2px;
+        font-size: larger;
+    }
+
+    .event .details .breakdown {
+        text-indent: 2em;
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        padding: 15px 5px;
+        letter-spacing: 2px;
+    }
+
+.event .card,
+.event .details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+}
+
+.event .card,
+.event .details {
+    transition: transform 1.5s;
+}
+
+.event:hover .card {
+    transform: rotateY(-180deg);
+}
+
+.event:hover .details {
+    transform: rotateY(0deg);
+}
+
+.event .card,
+.event .details {
+    transform-style: preserve-3d;
+}
+
+.threeD {
+    backface-visibility: hidden;
+    transform: translateZ(60px);
+}
+
+.breakdown li {
+    list-style-type: none;
+}
+
+#regisName {
+    margin-top: 10px;
+    width: auto;
+    height: 50px;
+    border-radius: 15px;
+}
+
+#myForm label {
+    color: #34495e;
+    font-weight: bold;
+}
+
+#myForm p {
+    color: #34495e;
+    margin: 0;
+    font-family: "Marcellus", serif;
+}
+.button-container {
+    display: flex;
+    flex-direction: column;
+    margin:10px;
+}
+.button-yes {
+    margin: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: #1abc9c;
+    color: #fff;
+    border-radius:10px;
+}
+.button-no {
+    margin: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: #ff6a00;
+    color: #fff;
+    border-radius: 10px;
+}
+
+#eventForm h3 {
+    margin: 10px;
+    color: #34495e;
+    font-family: "Marcellus", serif;
+}
+
+#eventForm label {
+    color: #34495e;
+    font-weight: bold;
+    line-height: 50px;
+}
+
+#eventForm input {
+    margin: 0;
+}
+
+
+/*
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .searchBar {
+    padding-top: 20px;
+  }
+
+  ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main {
+    flex-direction: column;
+
+    align-items: center;
+  }
+  .list {
+    height: fit-content;
+  }
+}
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main {
+    flex-direction: column;
+
+    align-items: center;
+    flex: 1 0 50%;
+  }
+  .list {
+    height: fit-content;
+  }
+}
+*/

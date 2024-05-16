@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create New User</h2>
+
+<form action="/AppUser/Create" method="POST">
+    <div>
+        <label>User Name:</label> <input type="text" name="UserName" />
+    </div>
+    <div>
+        <label>Password:</label> <input type="text" name="Password" />
+    </div>
+    <div>
+        <label>Email:</label> <input type="text" name="Email" />
+    </div>
+    <div>
+        <label>PhoneNumber:</label> <input type="text" name="PhoneNumber" />
+    </div>
+    <div>
+        <input type="submit" value="Create AppUser" />
+
+    </div>
+    <div>
+        <a href="@Url.Action("List", "AppUser")" class="btn btn-secondary">Cancel</a>
+    </div>
+
+</form>

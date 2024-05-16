@@ -1,0 +1,53 @@
+﻿@model MyPassionProject.Models.ViewModels.FindCategory﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Your Event</h2>
+
+<form action="/Event/Create" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="CreatorId" value=@Model.CreatorId>
+    <div>
+        <label>Event Name:</label> <input type="text" name="Title" />
+    </div>
+    <div>
+        <label>Event Location</label> <input type="text" name="Location" />
+    </div>
+    <div>
+        <label>Event Date & Time:</label> <input type="datetime-local" name="EventDateTime" />
+    </div>
+    <div>
+        <label>Event Capacity</label> <input type="number" name="Capacity" />
+    </div>
+    <div>
+        <label>Event Details</label> <textarea name="Details"></textarea>
+    </div>
+    <div class="row my-4">
+        <div class="col-md-3">
+
+            <label class="form-label">Category:</label>
+            <select name="CategoryId" class="form-select">
+                @foreach (var category in Model.CategoryOptions)
+                {
+                    <option value="@category.CategoryId">@category.CategoryName</option>
+
+                }
+            </select>
+
+        </div>
+    </div>
+    <div>
+        <label>Event Image:</label>
+        <input type="file" name="EventImage" accept="image/*" />
+    </div>
+
+
+    <div class="row my-4">
+        <div class="col-6">
+            <div>
+                <input type="submit" class="btn btn-primary" value="Create" />
+                <a href="@Url.Action("Account", "Home")" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,110 @@
+﻿@model MyPassionProject.Models.ViewModels.FindEvent
+@{
+    ViewBag.Title = "Account";
+}
+
+<link href="~/CSS/index.css" rel="stylesheet" />
+
+<h2>Welcome</h2>
+<div>
+    <a href="@Url.Action("New", "Event")" class="btn btn-primary">Post Your Own Event</a>
+</div>
+
+<h2>The Event You're In</h2>
+<div>
+    <div class="card-container">
+        @foreach (var relatedEvent in Model.RelatedEvent)
+        {
+            <div class="eachone">
+                <div class="event">
+                    <div class="card" style="background-image: url('@relatedEvent.ImagePath');">
+                        <div class="content">
+                            <h2 id="eventTitle">@relatedEvent.Title</h2>
+                            <h3> Location : </h3>
+                            <p id="eventLocation">@relatedEvent.Location</p>
+                            <h3>Date: </h3>
+                            <p id="eventDate">@relatedEvent.EventDateTime</p>
+                            <h3> Capacity:</h3>
+                            <p id="eventCapacity">@relatedEvent.Capacity</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p class="threeD">Details:</p>
+                        <p class="breakdown threeD">
+                            @relatedEvent.Details
+                            <a href="/Event/Find/@relatedEvent.EventId">See More</a>
+                        </p>
+                    </div><!--end of details-->
+                </div><!--end of event-->
+            </div><!--end of eachone-->
+
+            <div class="d-grid gap-4 d-md-block">
+                <form method="POST" action="@Url.Action("Associate", "Home")">
+                    @Html.Hidden("EventId", relatedEvent.EventId)
+                    @Html.Hidden("CurrentUserId", Model.CurrentUserId)
+                    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to join this event?')">Join</button>
+                </form>
+                <form method="POST" action="@Url.Action("UnAssociate", "Home")">
+                    @Html.Hidden("EventId", relatedEvent.EventId)
+                    @Html.Hidden("CurrentUserId", Model.CurrentUserId)
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel your participation in this event?')">Cancel</button>
+                </form>
+            </div>
+        }
+    </div><!--end of card-container-->
+</div>
+
+<h2>The Event You Posted</h2>
+<div>
+    <div class="card-container">
+        @foreach (var createdEvent in Model.CreatedEvents)
+        {
+            <div class="eachone">
+                <div class="event">
+                    <div class="card" style="background-image: url('@createdEvent.ImagePath');">
+                        <div class="content">
+                            <h2 id="eventTitle">@createdEvent.Title</h2>
+                            <h3> Location : </h3>
+                            <p id="eventLocation">@createdEvent.Location</p>
+                            <h3>Date: </h3>
+                            <p id="eventDate">@createdEvent.EventDateTime</p>
+                            <h3> Capacity:</h3>
+                            <p id="eventCapacity">@createdEvent.Capacity</p>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p class="threeD">Details:</p>
+                        <p class="breakdown threeD">
+                            @createdEvent.Details
+                            <a href="/Event/Find/@createdEvent.EventId">See More</a>
+                        </p>
+                    </div><!--end of details-->
+                </div><!--end of event-->
+            </div><!--end of eachone-->
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+            function confirmAssociate() {
+                var isAdmin = @User.IsInRole("Admin").ToString().ToLower();
+                if (!isAdmin) {
+                    return true; // Proceed with form submission without confirmation
+                }
+
+                var confirmed = confirm("Congratulations! You're in! Can't wait to see you there!");
+                return confirmed;
+            }
+
+            function confirmUnAssociate() {
+                var isAdmin = @User.IsInRole("Admin").ToString().ToLower();
+                if (!isAdmin) {
+                    return true; // Proceed with form submission without confirmation
+                }
+
+                var confirmed = confirm("What a pity! Hope to see you in another event!");
+                return confirmed;
+            }
+    </script>
+}

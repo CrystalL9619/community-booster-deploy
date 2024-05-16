@@ -1,0 +1,25 @@
+﻿@model MyPassionProject.Models.ViewModels.FindCategory
+@{
+    ViewBag.Title = "Find";
+}
+
+<a href="/Category/List">Go back to list</a>
+<h2>@Model.SelectedCategory.CategoryName</h2>
+
+
+<div>
+    @Html.ActionLink("Delete This Category", "DeleteConfirm", "Category", new { id = Model.SelectedCategory.CategoryId }, new { style = "color: #ff0000;" })
+</div>
+
+<div>
+    <a href="/Category/Edit/@Model.SelectedCategory.CategoryId">Update This  Category</a>
+</div>
+<div style="margin-top:100px;">
+    <h3>Events related to this category</h3>
+    @foreach (var Event in Model.RelatedEvents)
+    {
+        <a href="/Event/Find/@Event.EventId">@Event.Title</a><br>
+
+
+    }
+</div>
